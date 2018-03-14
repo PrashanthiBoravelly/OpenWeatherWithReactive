@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveSwift
 
 class WeatherIconManager: NetworkManager {
     
@@ -19,6 +20,7 @@ class WeatherIconManager: NetworkManager {
                                 failure: @escaping (CustomError) -> Void) {
         responseData(method: .get,
                      pathArray: ["img/w/", imageUrlString + ".png"])
+            .observe(on: UIScheduler())
             .startWithResult { result in
                 switch result {
                 case .success(let data):

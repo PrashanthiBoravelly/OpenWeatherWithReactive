@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReactiveSwift
 
 class WeatherInfoManager: NetworkManager {
     
@@ -19,6 +20,7 @@ class WeatherInfoManager: NetworkManager {
                 method: .get,
                 pathArray: ["data/2.5", "group"],
                 type: CityList.self)
+            .observe(on: UIScheduler())
             .startWithResult { result in
                 switch result {
                 case .success(let cityList):
